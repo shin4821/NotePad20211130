@@ -1,0 +1,266 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 한국어(대한민국) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_FINDINGFORM DIALOGEX 30, 73, 236, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "찾기"
+FONT 9, "맑은 고딕", 400, 0, 0x81
+BEGIN
+    LTEXT           "&찾을 내용(N):",-1,4,8,42,8
+    EDITTEXT        IDC_EDIT_FINDTEXT,47,7,128,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "대/소문자 구분(C)",IDC_BUTTON_MATCHCASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,27,64,12
+    GROUPBOX        "방향",1072,96,26,79,28,WS_GROUP
+    CONTROL         "&위로(U)",IDC_BUTTON_UP,"Button",BS_AUTORADIOBUTTON | WS_GROUP,99,38,32,12
+    CONTROL         "&아래로(D)",IDC_BUTTON_DOWN,"Button",BS_AUTORADIOBUTTON,133,38,39,12
+    DEFPUSHBUTTON   "&다음 찾기(F)",IDC_BUTTON_FINDNEXT,182,5,50,14,WS_GROUP
+    PUSHBUTTON      "취소",IDCANCEL,182,23,50,14
+    CONTROL         "주위에 배치(R)",IDC_BUTTON_SEARCHAROUND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,42,64,12
+END
+
+IDD_REPLACINGFORM DIALOGEX 36, 44, 256, 94
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "바꾸기"
+FONT 9, "맑은 고딕 Semilight", 300, 0, 0x0
+BEGIN
+    LTEXT           "찾을 내용(N):",-1,4,9,48,8
+    EDITTEXT        IDC_EDIT_FINDTEXT,54,7,124,12,ES_AUTOHSCROLL | WS_GROUP
+    LTEXT           "바꿀 내용(P):",-1,4,26,48,8
+    EDITTEXT        IDC_EDIT_REPLACETEXT,54,24,124,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "대/소문자 구분(C)",IDC_BUTTON_MATCHCASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,61,72,12
+    DEFPUSHBUTTON   "&다음 찾기(F)",IDC_BUTTON_FINDNEXT,183,4,67,14,WS_GROUP
+    PUSHBUTTON      "&바꾸기(R)",IDC_BUTTON_REPLACE,183,21,67,14
+    PUSHBUTTON      "&모두 바꾸기(A)",IDC_BUTTON_REPLACEALL,183,38,67,14
+    PUSHBUTTON      "취소",IDCANCEL,183,55,67,14
+    CONTROL         "주위에 배치(O)",IDC_BUTTON_SEARCHAROUND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,76,64,12
+END
+
+IDD_PAGESETUP DIALOGEX 32, 32, 403, 210
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "페이지 설정"
+FONT 9, "맑은 고딕 Semilight", 300, 0, 0x81
+BEGIN
+    CONTROL         "",1080,"Static",SS_WHITERECT | WS_GROUP,266,57,80,80
+    CONTROL         "",1081,"Static",SS_GRAYRECT | WS_GROUP,346,61,4,80
+    CONTROL         "",1082,"Static",SS_GRAYRECT | WS_GROUP,270,137,80,4
+    GROUPBOX        "용지",1073,8,10,224,56,WS_GROUP
+    LTEXT           "크기(Z):",1089,16,26,36,8
+    COMBOBOX        1137,64,24,160,160,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "공급(S):",1090,16,46,36,8
+    COMBOBOX        1138,64,44,160,160,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    GROUPBOX        "방향",1072,8,70,64,56,WS_GROUP
+    RADIOBUTTON     "세로(O)",1056,16,84,52,12,WS_GROUP | WS_TABSTOP
+    RADIOBUTTON     "가로(A)",1057,16,104,52,12
+    GROUPBOX        "여백(밀리미터)",1075,80,70,152,56,WS_GROUP
+    LTEXT           "왼쪽(L):",1102,88,86,32,8
+    EDITTEXT        1155,118,84,32,12,WS_GROUP
+    LTEXT           "오른쪽(R):",1103,156,86,35,8
+    EDITTEXT        1157,194,84,32,12,WS_GROUP
+    LTEXT           "위쪽(T):",1104,88,106,32,8
+    EDITTEXT        1156,118,104,32,12,WS_GROUP
+    LTEXT           "아래쪽(B):",1105,156,106,37,8
+    EDITTEXT        1158,194,104,32,12,WS_GROUP
+    DEFPUSHBUTTON   "확인",IDOK,241,186,65,14,WS_GROUP
+    PUSHBUTTON      "취소",IDCANCEL,315,186,62,14
+    PUSHBUTTON      "&값 입력",1038,49,177,33,14
+    GROUPBOX        "미리 보기",IDC_STATIC,242,10,134,167
+    LTEXT           "머리글",IDC_STATIC,10,139,34,8
+    LTEXT           "바닥글(F):",IDC_STATIC,10,159,32,8
+    EDITTEXT        IDC_EDIT_HEADER,49,137,181,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FOOTER,49,157,181,12,ES_AUTOHSCROLL
+END
+
+IDD_INFORMATION DIALOGEX 0, 0, 297, 230
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "메모장 정보"
+FONT 9, "맑은 고딕", 400, 0, 0x81
+BEGIN
+    DEFPUSHBUTTON   "확인",IDOK,240,209,50,14
+    CONTROL         IDB_BITMAP3,IDC_WINDOWS,"Static",SS_BITMAP | SS_NOTIFY,69,0,21,19
+    CONTROL         IDB_BITMAP1,IDC_NOTEPAD,"Static",SS_BITMAP | SS_NOTIFY,12,64,21,19
+    LTEXT           "Hyewon Shin",IDC_STATIC,52,66,72,11
+    LTEXT           "버전 21H1(OS 빌드 19043.1237)",IDC_STATIC,52,78,162,8
+    LTEXT           "ⓒ Hyewon Shin Corporation. All rights reserved.",IDC_STATIC,52,89,138,11
+    LTEXT           "Windows 10 Home 운영 체제 및 해당 사용자 인터페이스는 미국, 대한민국 및",IDC_STATIC,51,115,239,8
+    LTEXT           "기타 여러 나라에서 상표권 및 출원 중이거나 등록된 지적 재산권에 의해 보호됩",IDC_STATIC,51,128,239,8
+    LTEXT           "니다.",IDC_STATIC,51,140,16,8
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 310, 46
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "확인",IDOK,199,25,50,14
+    PUSHBUTTON      "취소",IDCANCEL,253,25,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_FINDINGFORM, DIALOG
+    BEGIN
+    END
+
+    IDD_REPLACINGFORM, DIALOG
+    BEGIN
+        RIGHTMARGIN, 238
+    END
+
+    IDD_PAGESETUP, DIALOG
+    BEGIN
+        RIGHTMARGIN, 362
+        BOTTOMMARGIN, 200
+    END
+
+    IDD_INFORMATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 223
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 303
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_FINDINGFORM AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_REPLACINGFORM AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_PAGESETUP AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+1546 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_INFORMATION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIALOG1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "bitmap1.bmp"
+
+IDB_BITMAP3             BITMAP                  "bitmap3.bmp"
+
+IDR_TOOLBAR             BITMAP                  "toolbar2.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR TOOLBAR 32, 32
+BEGIN
+    BUTTON      ID_BUTTON_PRINT
+    BUTTON      ID_BUTTON_PAGESET
+    BUTTON      ID_BUTTON_FIRST
+    BUTTON      ID_BUTTON_PREVIOUS
+    BUTTON      ID_BUTTON_NEXT
+    BUTTON      ID_BUTTON_LAST
+END
+
+#endif    // 한국어(대한민국) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
