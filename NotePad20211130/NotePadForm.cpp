@@ -136,6 +136,10 @@ void NotePadForm::OnMyCommand(UINT id) {
 		this->commandStory->Pile(command);
 	}
 
+	else {
+		delete command;
+	}
+
 
 #if 0
 	if (command != NULL) {

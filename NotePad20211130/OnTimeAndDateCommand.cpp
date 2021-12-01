@@ -308,6 +308,10 @@ void OnTimeAndDateCommand::Execute() {
 	this->currentX = changedX;
 	this->currentY = changedY;
 
+	if (creator != 0) {
+		delete creator;
+	}
+
 
 	this->notePadForm->Notify();
 }

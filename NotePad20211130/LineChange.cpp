@@ -25,6 +25,8 @@ int LineChange::FindSplitLocation(Glyph* row) {
 	int width = 0;
 	int length;
 	int location = -1;
+	Glyph* character;
+	string strCharacter;
 
 	//1. 줄을 입력받는다.
 	//2. windowWidth 보다 작거나 같고, length보다 작은 동안 반복한다.
@@ -35,6 +37,11 @@ int LineChange::FindSplitLocation(Glyph* row) {
 	//********************************************************************************************
 
 	length = row->GetLength();
+	if (length > 0) {
+		character = row->GetChild(0);
+		strCharacter = character->GetContent();
+	}
+
 
 	while (width <= windowWidth && index <= length) { //width <= windowWidth  현재<에서 =를 추가해줌.
 		width = this->notePadForm->getTextSize->totalCalculateX(index, row);
@@ -44,10 +51,20 @@ int LineChange::FindSplitLocation(Glyph* row) {
 
 	index--;
 
-	//현재 windowWidth가 최소화 크기이고, character가 탭키이면 windowWidth에 2를 더해준다.
+	//첫번째 글자가 탭키이고 index가 1이면 하기의 식은 들어가지 않는다.
 
-	if (width > windowWidth) { //탭키 때문에 임시로 +2 해둠.
-		location = index - 1;
+	if (width > windowWidth) { 
+		if (strCharacter == "\t") {
+			if (index != 1) {
+				location = index - 1;
+			}
+			else {
+				location = index;
+			}
+		}
+		else {
+			location = index - 1;
+		}
 	}
 
 
@@ -841,6 +858,8 @@ void LineChange::BiggerThanBefore() {
 	windowWidth = windowWidth - 5;
 	//windowWidth = windowWidth - 25;
 	BOOL ret_ = FALSE;
+	string strCharacter;
+	BOOL isPass = FALSE;
 
 
 	//1.2.1. note의 length만큼 반복한다.
@@ -849,6 +868,13 @@ void LineChange::BiggerThanBefore() {
 		//1. 해당 row의 nextRow를 구한다.
 		if (ret == TRUE) {
 			row = this->notePadForm->note->GetChild(i);
+
+			//(21.12.01.추가) ************************************
+			if (row->GetLength() > 0) {
+				character = row->GetChild(0);
+				strCharacter = character->GetContent();
+			}
+			//****************************************************
 		}
 		if (i + 1 < this->notePadForm->note->GetLength()) {
 			nextRow = this->notePadForm->note->GetChild(i + 1);
@@ -862,6 +888,13 @@ void LineChange::BiggerThanBefore() {
 
 			//2.1. dummyRow의 length보다 적고, width가 windowWidth보다 적은동안 반복한다.
 			width = this->notePadForm->getTextSize->totalCalculateX(row->GetLength(), row);
+
+			//(21.12.01.추가) *****************************************************************
+			if (strCharacter == "\t" && width > windowWidth) {
+				isPass = TRUE;
+			}
+			//*********************************************************************************
+
 
 			while (0 < nextRow->GetLength() && width <= windowWidth) {
 				//2.1.1. nextRow의 글자를 읽는다.
@@ -880,7 +913,7 @@ void LineChange::BiggerThanBefore() {
 			}
 
 			//2.2. 총 너비가 windowWidth를 넘는 경우,
-			if (width > windowWidth) {
+			if (isPass == FALSE && width > windowWidth) {
 
 				//(21.11.02.추가) while문 통과하지 않았으면 character 구해준다.
 				if (ret_ == FALSE) {
@@ -899,12 +932,16 @@ void LineChange::BiggerThanBefore() {
 			}
 
 			//2.3. nextRow가 0이지만 아직 width가 남는 경우,
-			else if (nextRow->GetLength() <= 0 && width <= windowWidth) {
+			else if (isPass == FALSE && nextRow->GetLength() <= 0 && width <= windowWidth) {
 				//2.3.1. nextRow를 지운다.
 				this->notePadForm->note->Remove(i + 1);
 				ret = FALSE;
 			}
-
+			else if (isPass == TRUE) {
+				isPass = FALSE;
+				ret = TRUE;
+				i++;
+			}
 		}
 
 		//3. nextRow가 NULL이거나 row인 경우,
@@ -969,18 +1006,24 @@ int LineChange::FindSplitLocation(Glyph* row, int width) {
 	int width_ = 0;
 	int length;
 	int location = -1;
+	Glyph* character;
+	string strCharacter;
 
 	//1. 줄을 입력받는다.
 	//2. windowWidth 보다 작거나 같고, length보다 작은 동안 반복한다.
 	windowWidth = width;
 
-//#if 0
 	//(21.09.10 추가) windowWidth에서 10을 빼줌으로써 여유있게 자동개행되도록 한다. *************
 	windowWidth = windowWidth - 23;
 	//********************************************************************************************
-//#endif
 
 	length = row->GetLength();
+
+	if (length > 0) {
+		character = row->GetChild(0);
+		strCharacter = character->GetContent();
+	}
+
 
 	while (width_ <= windowWidth && index <= length) { //width <= windowWidth
 		width_ = this->notePadForm->getTextSize->totalCalculateX(index, row);
@@ -988,10 +1031,20 @@ int LineChange::FindSplitLocation(Glyph* row, int width) {
 	}
 
 	index--;
-	if (width_ > windowWidth) { //location을 첨자화하기.(첫번째 빼야하는 부분부터)
-		location = index - 1;   //(21.09.10 수정) location = index - 2로 되있었는데, 윈도우사이즈 줄일때 두글자씩 넘어감. 
-	}
 
+	if (width_ > windowWidth) {
+		if (strCharacter == "\t") {
+			if (index != 1) {
+				location = index - 1;
+			}
+			else {
+				location = index;
+			}
+		}
+		else {
+			location = index - 1;
+		}
+	}
 #if 0
 	if (index <= length) { //location을 첨자화하기.(첫번째 빼야하는 부분부터)
 		location = index - 1;   //(21.09.10 수정) location = index - 2로 되있었는데, 윈도우사이즈 줄일때 두글자씩 넘어감. 

@@ -188,6 +188,10 @@ void OnImeCharCommand::Execute() {
 	this->notePadForm->isFirstComposing = true;
 	this->notePadForm->isChanged = true;
 
+	if (creator != NULL) {
+		delete creator;
+	}
+
 	this->notePadForm->Invalidate();
 
 
