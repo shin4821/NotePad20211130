@@ -31,20 +31,27 @@ int LineChange::FindSplitLocation(Glyph* row) {
 	windowWidth = this->notePadForm->scroll->windowWidth;
 
 	//(21.09.10 추가) windowWidth에서 10을 빼줌으로써 여유있게 자동개행되도록 한다. *************
-	windowWidth = windowWidth - 25;
+	windowWidth = windowWidth - 23;
 	//********************************************************************************************
 
 	length = row->GetLength();
 
 	while (width <= windowWidth && index <= length) { //width <= windowWidth  현재<에서 =를 추가해줌.
 		width = this->notePadForm->getTextSize->totalCalculateX(index, row);
+
 		index++;
 	}
+
 	index--;
 
-	if (width > windowWidth) {
+	//현재 windowWidth가 최소화 크기이고, character가 탭키이면 windowWidth에 2를 더해준다.
+
+	if (width > windowWidth) { //탭키 때문에 임시로 +2 해둠.
 		location = index - 1;
 	}
+
+
+
 #if 0
 	//if (index <= length) 
 	if (width > windowWidth) { //location을 첨자화하기.(첫번째 빼야하는 부분부터)
@@ -969,7 +976,7 @@ int LineChange::FindSplitLocation(Glyph* row, int width) {
 
 //#if 0
 	//(21.09.10 추가) windowWidth에서 10을 빼줌으로써 여유있게 자동개행되도록 한다. *************
-	windowWidth = windowWidth - 25;
+	windowWidth = windowWidth - 23;
 	//********************************************************************************************
 //#endif
 
@@ -1009,7 +1016,7 @@ int LineChange::FindSplitLocationForMargin(Glyph* row, int width) {
 
 
 	//windowWidth에서 10을 빼줌으로써 여유있게 자동개행되도록 한다. *************
-	windowWidth = windowWidth - 25;
+	windowWidth = windowWidth - 23;
 	//***************************************************************************
 
 

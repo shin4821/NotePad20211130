@@ -42,18 +42,44 @@ void Next::KeyDown() {
 	Long beforeCurrentY = this->notePadForm->note->GetCurrent();
 	int strSizeY = this->notePadForm->getTextSize->GetX(131);
 	int changedNPos;
+	Long currentY;
+	Long currentX;
+	bool isEnd = false;
+
+
+	//0. Next 적용전 캐럿의 위치를 구한다.
+	currentY = this->notePadForm->note->GetCurrent();
+	row = this->notePadForm->note->GetChild(currentY);
+	length = row->GetLength();
+	currentX = row->GetCurrent();
+
+	//0.1 현재 currentX와 length가 같은지 확인한다.
+	if (currentX == length) {
+		isEnd = true;
+	}
 
 	//1. 현재 note에서 Next 출력한다.
 	this->notePadForm->note->Next();
 
 	//2. 현재 좌표를 확인한다.
-	Long currentY = this->notePadForm->note->GetCurrent();
+	currentY = this->notePadForm->note->GetCurrent();
 	row = this->notePadForm->note->GetChild(currentY);
-	Long currentX = row->GetCurrent();
+	length = row->GetLength();
+	currentX = row->GetCurrent();
 
 	//(21.11.15.추가) 자동 개행된 줄에 대해 좌우 방향키에 의한 행간 이동 오류 방지용
 	//3. 현재 자동개행인 경우,
 	if (this->notePadForm->isLineChangeButtonClicked == TRUE) {
+
+		//3.0. isEnd가 true이고 현재 currentX가 0이며, 해당 줄의 length가 0보다 큰 경우, ******************
+		//currentX 좌표를 1씩 더해준다.
+		if (isEnd == true && currentX == 0 && length > 0) {
+			currentX++;
+			row->MoveCurrent(currentX);
+		}
+		//**************************************************************************************************
+
+
 		//3.1. 현재 캐럿의 x좌표가 row의 length이고, 그 다음줄이 NULL이 아니고 DummyRow인 경우,
 		length = row->GetLength();
 		noteLength = this->notePadForm->note->GetLength();
