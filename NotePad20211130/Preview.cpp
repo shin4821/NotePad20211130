@@ -167,7 +167,7 @@ void Preview::OnPaint() {
 
 
 	//1. 임시 DC를 만든다.
-	CDC* pDC = GetDC();
+	//CDC* pDC = GetDC();
 	CPaintDC dc(this);
 	CDC dcTemp;
 
@@ -225,19 +225,6 @@ void Preview::OnPaint() {
 		this->notePadForm->lineChange->LineChangeButtonNotClicked();
 	}
 
-	//(21.11.30.수정)
-	//this->notePadForm->lineChange->LineChangeButtonClicked(actualWidth * 4.74);
-	//int length = this->notePadForm->note->GetLength();
-
-
-	//현재 문서 크기에 맞는 폰트 사이즈를 구한다. (사실 이미지화 하여 압축해주면 굳이 따로 찾을필요 없다)
-	int realPaperWidth = realWindowWidth; 
-	int realPaperHeight = (realPaperWidth * virtualPaperHeight) / virtualPaperWidth;
-
-
-	//(21.10.19 추가)
-	int realPaperHeight_ = (virtualPaperHeight * previewHeight) / 951;
-	int realFontSize = this->notePadForm->printFontSize;
 
 	HFONT hFont;
 	HFONT oldFont;
@@ -251,7 +238,7 @@ void Preview::OnPaint() {
 	hFont = CreateFontIndirect(&printLogFont);
 	oldFont = (HFONT)dcTemp.SelectObject(hFont);
 
-	ReleaseDC(pDC);
+	//ReleaseDC(pDC);
 
 	//글자를 출력한다.
 	CSize strSize = dcTemp.GetTabbedTextExtent("각", 0, NULL);

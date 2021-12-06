@@ -201,7 +201,7 @@ Long Composite::Load(string fileName) {
 				row->MoveCurrent(row->GetLength());
 			}
 
-			if (isFirst == true && buffer[index] == '\n') {
+			if (isFirst == true && (buffer[index] == '\n' || buffer[index] == '\0')) {
 				//3.3. 새로운 줄을 만들어 note에 Add한다.
 				row = new Row();
 				this->Add(row);
