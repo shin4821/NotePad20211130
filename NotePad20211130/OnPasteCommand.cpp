@@ -424,6 +424,8 @@ void OnPasteCommand::Execute() {
 
 		//Caret과 Scroll을 업데이트 해준다. *************************************
 
+		//(21.12.06.추가)
+
 		// Scroll 업데이트 할 때의 조건을 설정한다.
 		this->notePadForm->isJumpOverForPrevious = false;
 		this->notePadForm->isJumpOverForNext = false;
@@ -546,8 +548,6 @@ void OnPasteCommand::Undo() {
 	keyAction = factoryProduct.Make(VK_BACK, NULL, NULL);
 	keyAction->KeyDown();
 }
-
-
 
 void OnPasteCommand::Redo() {
 	Glyph* row;

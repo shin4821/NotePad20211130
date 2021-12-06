@@ -209,7 +209,7 @@ void OnNewCreateCommand::Execute() {
 		this->notePadForm->commandStory->redoList->DeleteAll();
 
 		//1.6. "테스트용"으로 파일명을 변경한다
-		this->notePadForm->SetWindowText("테스트용");
+		this->notePadForm->SetWindowText("제목 없음");
 
 
 		this->notePadForm->Notify();

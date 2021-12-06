@@ -375,7 +375,8 @@ void OnCutOffCommand::Undo() { //BackSpace의 Undo와 비슷
 
 
     this->notePadForm->isUndo = false;
-
+    //(21.12.06.추가)
+    this->notePadForm->isFirstComposing = true;
 }
 
 

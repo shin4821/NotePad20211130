@@ -490,7 +490,8 @@ void OnTimeAndDateCommand::Redo() {
 	this->currentY = this->notePadForm->currentY;
 
 	this->notePadForm->isUndo = false;
-	//this->notePadForm->isThereSelected == false;
+	//(21.12.06.Ãß°¡)
+	this->notePadForm->isFirstComposing = true;
 }
 
 void OnTimeAndDateCommand::SetCheck() {

@@ -140,13 +140,13 @@ void NotePadForm::OnMyCommand(UINT id) {
 		delete command;
 	}
 
-
 #if 0
-	if (command != NULL) {
-		delete command;
-		command = NULL;
+	//(21.12.06.추가) OnImeComposition, OnImeChar이 아닌 경우, isFirstComposing을 TRUE로 넣어준다.
+	if (id != 40004 && id!=40005) {
+		this->isFirstComposing = TRUE;
 	}
 #endif
+
 
 	Invalidate();
 
@@ -306,9 +306,9 @@ int NotePadForm::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 
 	//3.7.6. 해당 파일을 Load한다. 이동하다 위해 키자마자 뜨도록***********************
-	this->note->Load("테스트용.txt");
+	this->note->Load("제목 없음.txt");
 	//3.7.7. 해당 파일의 캡션을 바꾼다.
-	SetWindowText("테스트용");
+	SetWindowText("제목 없음");
 
     //current를 맨 처음으로(0,) 이동한다.
 	this->note->MoveCurrent(0);

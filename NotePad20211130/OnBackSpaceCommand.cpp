@@ -720,6 +720,9 @@ void OnBackSpaceCommand::Undo() {
 	//(21.11.02. 추가) 현재 자동개행버튼 상황을 적용시킨다.
 	this->isLineChangeButtonClicked = this->notePadForm->isLineChangeButtonClicked;
 	this->windowWidth = windowWidth;
+
+	//(21.12.06.추가)
+	this->notePadForm->isFirstComposing = true;
 }
 
 void OnBackSpaceCommand::Redo() {

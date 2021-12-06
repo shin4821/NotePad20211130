@@ -56,6 +56,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -80,6 +88,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -199,7 +215,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:NotePad_SetUp"
         "ProductCode" = "8:{B7BADFF7-8158-46E0-BDF3-D19C32CB2D06}"
-        "PackageCode" = "8:{47DCA969-CAFE-4515-A862-6F6389F9392E}"
+        "PackageCode" = "8:{E6C64B25-0145-4474-872D-DF9A813F57B8}"
         "UpgradeCode" = "8:{E36842B4-0D35-4954-A04D-796396862CAF}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -207,12 +223,12 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "Manufacturer" = "8:HyewonShin"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:NotePad_SetUp"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:HyewonShin"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
@@ -321,7 +337,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_19C7A522EBFB469C965B98BEBB54B8F6"
             {
-            "Name" = "8:NotePad1201"
+            "Name" = "8:NotePad_shin"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -335,7 +351,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6992F48EEB904C0386A06B8AF5880C17"
             {
-            "Name" = "8:NotePad1201"
+            "Name" = "8:NotePad_shin"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -748,7 +764,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7657F6C5579F444AAF512E9AAE1D3F94"
             {
-            "SourcePath" = "8:..\\Debug\\NotePad20211130.exe"
+            "SourcePath" = "8:..\\Release\\NotePad20211130.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1763874B7D4C4418BFE846A34F76A7BD"

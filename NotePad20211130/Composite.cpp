@@ -14,7 +14,7 @@
 #include"CreateProduct.h" // 21.07.14 Load 위해 추가
 #include <cstdio>
 #include <mbstring.h>
-
+#include <fstream> //C++ 입출력 함수
 using namespace std;
 #pragma warning(disable:4996)
 
@@ -108,8 +108,8 @@ void Composite::MoveCurrent(Long current) {
 	this->current = current;
 }
 
-Long Composite::Save(string fileName) { //string fileName
-	Glyph::Save(fileName); //fileName
+Long Composite::Save(string fileName) { 
+	Glyph::Save(fileName); 
 
 	FILE* file = 0;
 	Long i = 0;
@@ -118,41 +118,107 @@ Long Composite::Save(string fileName) { //string fileName
 	Glyph* row;
 	Glyph* character;
 	string character_= { 0, };
+	std::ofstream ofs;
 
+	//1. 텍스트파일을 ofstream으로 연다.
+	ofs.open(fileName);
 
-	//1. 텍스트파일을 wt로 연다.
-	file = fopen(fileName.c_str(), "wt"); //"NotePad.txt" 
 	//2. 파일이 제대로 열렸으면,
-	if (file != NULL) {
+	if (!ofs.fail()) {
 
 		//2.1. note의 length만큼 반복한다.
 		while (i < this->length) {
 			//2.1.1. 해당 row의 length만큼 반복한다.
 			row = this->glyphs.GetAt(i);
-			//rowLength = row->GetLength();
 			character_ = row->GetContent();
 
-			//fwrite(&character_, sizeof(string), 1, file); //sizeof(string), 1
-
-			fputs(character_.c_str(), file);
-
-			//2.1.2. 텍스트파일에 개행문자를 write한다.
-			//fwrite("\r\n", sizeof(char), 1, file);
-
-			//(21.11.17.추가) 맨 마지막 줄일 경우, 추가하지 않는다.
-			if (i + 1 < this->length) {
-				fputs("\n", file);
-			}
-
+			ofs << character_.c_str() <<std::endl;
 
 			i++;
 		}
 		//2.2. 파일을 닫는다.
-		fclose(file);
+		ofs.close();
 	}
 	return this->length;
 }
 
+Long Composite::Load(string fileName) {
+	Glyph::Load(fileName);
+
+	char buffer[768] = { 0, };
+	char character_[2];
+	Long i;
+	Long index = 0;
+	Long j = 0;
+	Glyph* row = 0;
+	Glyph* character = 0;
+	bool isFirst = true;
+	std::ifstream ifs;
+
+	//1. 파일명, note를 입력받는다.
+	//2. 해당 파일을 ofstream로 연다.
+	ifs.open(fileName);
+
+	//3. 파일이 제대로 열렸으면,
+	if (!ifs.fail()) {
+		
+		//3.1. 파일의 끝이 아닌동안 반복한다.
+		while (ifs.getline(buffer, 768)) {
+
+			if (isFirst == false) {
+				//3.3. 새로운 줄을 만들어 note에 Add한다.
+				row = new Row();
+				this->Add(row);
+			}
+
+			//3.2.1. 노트의 현재 줄을 구한다.
+			row = this->glyphs.GetAt(j);
+			index = 0;
+
+			//3.2.2. 개행문자가 아닌동안 반복한다.
+			while (buffer[index] != '\n' && buffer[index] != '\0') {
+
+				isFirst = false;
+
+				//3.2.3.1. 현재 문자가 1byte인지 2byte인지 구분한다.
+				character_[0] = buffer[index];
+				character_[1] = buffer[index + 1];
+
+
+				//3.2.3.2. 1byte인 경우,
+				if (character_[0] >= 0 && character_[0] < 128) {
+					character_[0] = buffer[index];
+					character = new SingleByteCharacter(character_[0]);
+					index++;
+				}
+				//3.2.3.3. 2byte인 경우
+				else {
+					character = new DoubleByteCharacter(character_);
+					index = index + 2;
+				}
+				//3.2.3.4. row에 Add한다.
+				row->Add(character); //row->Add(character);
+				row->MoveCurrent(row->GetLength());
+			}
+
+			if (isFirst == true && buffer[index] == '\n') {
+				//3.3. 새로운 줄을 만들어 note에 Add한다.
+				row = new Row();
+				this->Add(row);
+			}
+
+			this->current = this->length;
+			j++;
+		}
+
+		//3.4. 디스크파일을 닫는다.
+		ifs.close();
+	}
+	return this->length;
+}
+
+
+#if 0
 Long Composite::Load(string fileName) {
 	Glyph::Load(fileName);
 
@@ -341,6 +407,8 @@ Long Composite::Load(string fileName) {
 	}
 	return this->length;
 }
+#endif
+
 
 void Composite::First() { //노트가 들어오든 줄이 들어오든 current를 0으로
 	this->current = 0;
