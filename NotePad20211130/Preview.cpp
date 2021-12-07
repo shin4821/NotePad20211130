@@ -440,6 +440,10 @@ void Preview::OnPaint() {
 
 	dcTemp.SelectObject(oldBMP);
 	::DeleteObject(hbmp);
+
+	dcTemp.SelectObject(oldFont);
+	::DeleteObject(hFont);
+
 	dcTemp.DeleteDC();
 
 

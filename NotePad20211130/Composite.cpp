@@ -142,6 +142,56 @@ Long Composite::Save(string fileName) {
 	return this->length;
 }
 
+#if 0
+Long Composite::Save(string fileName) { //string fileName
+	Glyph::Save(fileName); //fileName
+
+	FILE* file = 0;
+	Long i = 0;
+	Long j;
+	Long rowLength;
+	Glyph* row;
+	Glyph* character;
+	string character_ = { 0, };
+
+
+	//1. 텍스트파일을 wt로 연다.
+	file = fopen(fileName.c_str(), "wt"); //"NotePad.txt" 
+	//2. 파일이 제대로 열렸으면,
+	if (file != NULL) {
+
+		//2.1. note의 length만큼 반복한다.
+		while (i < this->length) {
+			//2.1.1. 해당 row의 length만큼 반복한다.
+			row = this->glyphs.GetAt(i);
+			//rowLength = row->GetLength();
+			character_ = row->GetContent();
+
+			//fwrite(&character_, sizeof(string), 1, file); //sizeof(string), 1
+
+			fputs(character_.c_str(), file);
+
+			//2.1.2. 텍스트파일에 개행문자를 write한다.
+			//fwrite("\r\n", sizeof(char), 1, file);
+
+			//(21.11.17.추가) 맨 마지막 줄일 경우, 추가하지 않는다.
+			if (i + 1 < this->length) {
+				fputs("\n", file);
+			}
+
+
+			i++;
+		}
+		//2.2. 파일을 닫는다.
+		fclose(file);
+	}
+	return this->length;
+}
+
+
+#endif
+
+
 Long Composite::Load(string fileName) {
 	Glyph::Load(fileName);
 
@@ -216,7 +266,6 @@ Long Composite::Load(string fileName) {
 	}
 	return this->length;
 }
-
 
 #if 0
 Long Composite::Load(string fileName) {

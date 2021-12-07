@@ -2486,6 +2486,11 @@ void NotePadForm::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags) {
 
 	}
 #endif
+
+	if (nChar == VK_SHIFT) {
+		this->isShiftClicked = FALSE;
+	}
+
 }
 
 void NotePadForm::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar) {
@@ -2672,14 +2677,24 @@ void NotePadForm::OnLButtonDown(UINT nFlags, CPoint point) {
 	Long y = point.y + this->scroll->siVertical.nPos;
 	Long currentY;
 	Long currentX;
+	Long firstX;
+	Long firstY;
 	Glyph* row;
 	BOOL isBigger = TRUE;
+	BOOL isSelected = FALSE;
 
 	//(21.11.17.추가) 변경하기 전 좌표를 구해놓는다.
 	Long beforeCurrentY = this->note->GetCurrent();
 	row = this->note->GetChild(beforeCurrentY);
 	Long beforeCurrentX = row->GetCurrent();
 
+	firstX = this->selectWords->firstX;
+	firstY = this->selectWords->firstY;
+
+    //선택된 단어가 있는지 확인한다.
+	if (this->selectWords->endX > 0 || this->selectWords->endY > 0) {
+		isSelected = TRUE;	
+	}
 
 	//0. 선택된 단어를 초기화한다.
 	this->selectWords->firstX = 0;
@@ -2688,7 +2703,7 @@ void NotePadForm::OnLButtonDown(UINT nFlags, CPoint point) {
 	this->selectWords->endY = 0;
 
 	this->selectWords->isDragging = FALSE;
-	this->isShiftClicked = FALSE;
+	//(21.12.07.추가) this->isShiftClicked = FALSE; 
 	this->isShifting = FALSE;
 
 	this->ShiftX = 0;
@@ -2724,14 +2739,21 @@ void NotePadForm::OnLButtonDown(UINT nFlags, CPoint point) {
 #endif
 
 	//(21.11.17.추가) 만약 Shift키 눌려있으면 해당 좌표까지 선택해준다.
-	if (this->isShiftClicked == TRUE) {
-
-		this->selectWords->firstX = this->ShiftX;
-		this->selectWords->firstY = this->ShiftY;
+	if (this->isShiftClicked == TRUE && isSelected == TRUE) {
+		this->selectWords->firstX = firstX;
+		this->selectWords->firstY = firstY;
 		this->selectWords->endX = currentX;
 		this->selectWords->endY = currentY;
+	}
 
+	else if (this->isShiftClicked == TRUE && isSelected == FALSE) {
 
+		//this->selectWords->firstX = this->ShiftX;
+		//this->selectWords->firstY = this->ShiftY;
+		this->selectWords->firstX = beforeCurrentX;
+		this->selectWords->firstY = beforeCurrentY;
+		this->selectWords->endX = currentX;
+		this->selectWords->endY = currentY;
 	}
 	else {
 		//6. 선택된 단어를 정한다.
@@ -2746,7 +2768,6 @@ void NotePadForm::OnLButtonDown(UINT nFlags, CPoint point) {
 	this->isUp = FALSE;
 	this->isDown = FALSE;
 	this->isDoubleByte = FALSE;
-	
 
 	this->Notify();	
 	this->Invalidate();

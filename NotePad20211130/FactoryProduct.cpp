@@ -47,7 +47,7 @@ KeyAction* FactoryProduct::Make(UINT nCharFirst, UINT nCharSecond, UINT nCharThi
 	Long endY = this->notePadForm->selectWords->GetEndY();
 	Long endX = this->notePadForm->selectWords->GetEndX();
 
-	if (firstX > 0 || endX > 0) {
+	if (endY > 0 || endX > 0) {
 		isSelected = TRUE;
 	}
 
